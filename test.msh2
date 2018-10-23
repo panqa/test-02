@@ -1,0 +1,24 @@
+@echo off
+if "%1"=="" GOTO USAGE
+if "%2"=="" GOTO USAGE
+
+echo @echo off
+FOR /L %%i IN (1 1 %2) DO (
+  echo if "%%%%i"=="" GOTO USAGE
+)
+
+echo %1 %%1 %%2 %%3 %%4 %%5 %%6 %%7 %%8 %%9
+if "%2"=="0" GOTO END
+echo GOTO END
+echo :USAGE
+echo %1 /?
+echo :END
+GOTO END
+
+:USAGE
+echo maps a command to an alias
+echo map %%1 %%2 
+echo %%1 is command to map
+echo %%2 is the number of command line args the command *needs*
+echo e.g map copy 2 > cp.bat (to map copy to cp.bat)
+:END
